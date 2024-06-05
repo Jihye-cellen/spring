@@ -1,0 +1,10 @@
+package com.example.dao;
+
+import java.util.*;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UsersDAO {
+	public List<HashMap<String, Object>> list();
+}

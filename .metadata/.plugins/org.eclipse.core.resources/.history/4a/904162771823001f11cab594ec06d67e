@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사용자등록</title>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>	
+	<h1>사용자등록</h1>
+	<form method="post" name="frm">
+		<input placeholder="아이디" name="uid"><hr>
+		<input placeholder="비밀번호" name="upass"><hr>
+		<input placeholder="이름" name="uname"><hr>
+		<button>등록</button>
+		<button type="reset">취소</button>
+	</form>
+</body>
+<script>
+	$(frm).on("submit", function(e){
+		e.preventDefault();
+		
+		const uid = $(frm.uid).value()
+''	});
+	
+</script>
+</html>

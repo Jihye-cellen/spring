@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사용자등록</title>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>	
+	<h1>사용자등록</h1>
+	<form method="post" name="frm">
+		<input placeholder="아이디" name="uid"><hr>
+		<input type="password" placeholder="비밀번호" name="upass"><hr>
+		<input placeholder="이름" name="uname"><hr>
+		<button>등록</button>
+		<button type="reset">취소</button>
+	</form>
+</body>
+<script>
+	$(frm).on("submit", function(e){
+		e.preventDefault();
+		
+		const uid = $(frm.uid).val();
+		const upass= $(frm.upass).val();
+		const uname= $(frm.uname).val();
+		
+		if(uid==""|| upass=="" || uname==""){
+			alert("모든 데이터를 입력하세요!");
+			return;
+		}
+		if(!confirm("회원가입을 하시겠습니까?")) return;
+		
+		$.ajax({
+			type:"post",
+			url:"/users/insert",
+			data:{uid, uname, upass},
+			dataType:"json",
+			success:function(){
+				alert("가입완료!")
+			}
+		});
+	});
+	
+</script>
+</html>
