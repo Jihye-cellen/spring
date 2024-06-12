@@ -1,0 +1,30 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<h1>게시글 수정</h1>
+	
+	<form name="frm">
+		<input name="title" th:value="${bbs.title}" size="50"><br>
+		<textarea name="contents" th:text="${bbs.contents}" rows=10 cols=50></textarea>
+		<button>수정</button>
+		<button type="reset">취소</button>
+	</form>
+</div>
+<script>
+ 	const bid = "[[${bbs.bid}]]";
+ 	
+	$(frm).on("submit", function(e){
+		e.preventDefault();
+		if(!confirm("정말로 수정하시겠습니까?")) return;
+		
+		$.ajax({
+			type:"post",
+			url:"/bbs/update",
+			data:{
+				title:$(frm.title).val(), 
+				contents:$(frm.contents).val(), 
+				bid:bid},
+			success:function(){
+				location.href="/bbs/read/"+ bid;
+			}	
+		});
+	})
+</script>

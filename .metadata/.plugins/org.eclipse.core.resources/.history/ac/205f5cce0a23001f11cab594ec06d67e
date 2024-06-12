@@ -1,8 +1,0 @@
-package com.example.dao;
-import java.util.*;
-
-public interface UserDAO {
-	public List<HashMaP<String, Object>> list(){
-		
-	}
-}

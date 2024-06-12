@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>홈페이지</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+</head>
+<body xmlns:th="http://www.thymeleaf.org">
+	<div th:include="menu.html"></div>
+	<div th:include="${pagename}"></div>
+</body>
+</html>

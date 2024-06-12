@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+	<h1>사용자정보</h1>
+	<div  xmlns:th="http://www.thymeleaf.org">
+		<div>아이디: <span th:text="${user.uid}"></span></div>
+		<div>비밀번호: <span th:text="${user.upass}"></span></div>
+		<div>이름: <span th:text="${user.uname}"></span></div>
+		<div>전화: <span th:text="${user.phone}"></span></div>
+		<div>주소: <span th:text="${user.address1}"></span> <span th:text="${user.address2}"></span></div>
+		<div>가입일: <span th:text="${#dates.format(user.regDate, 'yyyy.MM.dd HH:mm:dd')}"></span></div>
+	</div>
+	<div>
+		<button id="btnDelete">삭제</button>
+		<button id="btnUpdate">수정</button>
+		<a href="/users/list"><button>목록</button></a>
+	</div>
+</body>
+<script>
+const uid="[[${user.uid}]]";
+	
+	$("#btnDelete").on("click", function(){
+		if(!confirm(uid + "아이디를 삭제하시겠습니까?")) return;
+		$.ajax({
+			type:"post",
+			url:"/users/delete/" + uid,
+			success:function(){
+				alert("삭제완료!");
+				location.href="/users/list";
+			},
+			error:function(){
+				alert("삭제실패");
+			}
+				
+		});
+	});
+	
+	$("#btnUpdate").on("click", function(){
+		location.href="/users/update/" + uid;
+	});
+</script>
+</html>

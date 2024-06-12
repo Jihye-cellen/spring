@@ -1,7 +1,0 @@
-package com.example.domain;
-
-public class UserVO {
-	private String uid;
-	private String uname;
-	private String upass;
-}

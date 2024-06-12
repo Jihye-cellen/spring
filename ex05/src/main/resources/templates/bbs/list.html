@@ -1,0 +1,87 @@
+<div>
+	<h1>게시글목록</h1>
+	<div><span id="total"></span></div>
+	<div>
+		<a href="/bbs/insert"><button id="btn_insert">글쓰기</button></a>
+		<form name="frm">
+			<select name="key">
+				<option value="title">제목</option>
+				<option value="contents">내용</option>
+				<option value="uid">작성자(아이디)</option>
+				<option value="uname">작성자(이름)</option>
+			</select>
+			<input placeholder="검색어" name="word"/>
+			<button>검색</button>
+		</form>
+	</div>
+	<div id="div_list"></div><br>
+	<div>
+		<button id="prev">이전</button>
+		<span id="page"></span>
+		<button id="next">다음</button>
+	</div>
+	<script id="temp_list" type="x-handlebars-template">
+		{{#each documents}}
+			<div>
+				<a href="/bbs/read/{{bid}}"> {{bid}} | {{title}} | {{uid}}({{uname}}) </a>
+				<span style="color:red">{{viewcnt}}</span> 
+			</div>
+		{{/each}}
+	</script>
+</div>
+<script>
+	
+	let page=1;
+	let size=10;
+	let key=$(frm.key).val();
+	let word=$(frm.word).val();
+	
+	$(frm).on("submit", function(e){
+		e.preventDefault();
+		key=$(frm.key).val();
+		word=$(frm.word).val();
+		page=1;
+		getList();
+	});
+	
+	$("#prev").on("click", function(){
+		page--;
+		getList();
+	});
+	
+	$("#next").on("click", function(){
+		page++;
+		getList();
+	});
+	
+	if(user){
+		$("#btn_insert").show();
+	}else{
+		$("#btn_insert").hide();
+	}
+	
+	getList();
+	function getList(){
+		$.ajax({
+			type:"get",
+			url:"/bbs/list.json",
+			data:{page, size, key, word},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				const temp = Handlebars.compile($("#temp_list").html());
+				$("#div_list").html(temp(data));
+				$("#total").html(`검색수: ${data.total}`);
+				
+				const last = Math.ceil(data.total/size);
+				$("#page").html(page + "/" + last);
+				
+				if(page==1) $("#prev").attr("disabled", true);
+				else $("#prev").attr("disabled", false);
+				
+				if(page==last) $("#next").attr("disabled", true);
+				else $("#next").attr("disabled", false);
+			}
+		});
+	}
+</script>
