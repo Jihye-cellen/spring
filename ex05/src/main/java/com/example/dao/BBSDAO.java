@@ -12,4 +12,5 @@ public interface BBSDAO {
 	public void update (BBSVO vo);
 	public void insert(BBSVO vo);
 	public void updateViewcnt (int bid);
+	public void updateReplycnt (int bid, int amount);
 }
