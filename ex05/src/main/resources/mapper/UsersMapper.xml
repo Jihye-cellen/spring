@@ -5,5 +5,13 @@
 	<select id="read" resultType="com.example.domain.UserVO">
  		select * from users where uid=#{uid};
  	</select>
- 	
+ 	<update id="update">
+ 		update users set uname=#{uname}, phone=#{phone}, address1=#{address1}, address2=#{address2} where uid=#{uid}
+ 	</update>
+ 	<update id="updatePhoto">
+ 		update users set photo=#{photo} where uid=#{uid}
+ 	</update>
+ 	<update id="updatePass">
+ 		update users set upass=#{upass} where uid=#{uid}
+ 	</update>
 </mapper>
