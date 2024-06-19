@@ -1,0 +1,35 @@
+<div>
+	<form name="frm">
+		<input name="title" size="50"><br>
+		<textarea name="contents" rows="10" cols="80"></textarea>
+		
+		<div>
+			<button>글쓰기</button>
+			<button type="reset">취소</button>
+		</div>
+	</form>
+</div>
+<script>
+	const uid= user.uid;
+	
+	$(frm).on("submit", function(e){
+		e.preventDefault();
+		const title=$(frm.title).val();
+		const contents=$(frm.contents).val();
+		if(title==""){
+			alert("제목을 입력하세요!"); 
+			return;
+		}
+		//글저장
+		$.ajax({
+			type:"post",
+			url:"/bbs/insert",
+			data:{uid, title, contents},
+			success:function(){
+				alert("글쓰기 등록완료!");
+				location.href ="/bbs/list";
+			}
+			
+		});
+	});
+</script>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MessageMapper">
+	<insert id="insert">
+		insert into messages (sender, receiver, message) values (#{sender}, #{receiver}, #{message})
+	</insert>
+	<select id="readSend" resultType="com.example.domain.MessageVO">
+		select m.*, u.uname, u.photo from messages m, users u where m.receiver = u.uid and mid=#{mid};
+	</select>
+	<select id="readReceive" resultType="com.example.domain.MessageVO">
+		select m.*, u.uname, u.photo from messages m, users u where m.sender = u.uid and mid=#{mid};
+	</select>
+	<update id="updateReadDate">
+		update messages set readData=now() where mid=#{mid}
+	</update>
+	<select id="listSend" resultType="com.example.domain.MessageVO">
+		select m.*, u.uname from messages m, users u where sender=#{sender} and u.uid=m.receiver and sendDelete=0 order by mid desc;
+	</select>
+	<select id="listReceive" resultType="com.example.domain.MessageVO">
+		select m.*, u.uname from messages m, users u where receiver=#{receiver} and u.uid=m.sender and ReceiveDelete=0 order by mid desc;
+	</select>
+	<update id="deleteReceive">
+		update messages set ReceiveDelete=1 where mid=#{mid}
+	</update>
+	<update id="deleteSend">
+		update messages set sendDelete=1 where mid=#{mid}
+	</update>
+	<select id="listDelete" resultType="com.example.domain.MessageVO">
+		select * from messages where (sender=#{uid} or receiver=#{uid}) and (sendDelete=1 or ReceiveDelete=1) order by mid desc;
+	</select>
+	<update id="resetDelete">
+		update messages 
+		<if test="type=='send'">
+			set sendDelete=0
+		</if>
+		<if test="type=='receive'">
+			set receiveDelete=0
+		</if>
+			where mid=#{mid}
+	</update>
+	
+</mapper>

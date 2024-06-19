@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.AccountMapper">
+	<select id="read" resultType="com.example.domain.AccountVO">
+	 select *, format(balance,0) fmtBalance from account where uid=#{uid}
+ 	</select>
+ 	<select id="list" resultType="com.example.domain.AccountVO">
+	 select * from account 
+ 	</select>
+ 	<update id="update">
+ 		update account set balance=balance + #{amount} * #{type} where ano = #{ano}
+ 	</update>
+</mapper>

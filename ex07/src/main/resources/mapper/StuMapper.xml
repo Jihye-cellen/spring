@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.StuMapper">
+	<select id="list" resultType="com.example.domain.StuVO">
+ 		select * from view_stu1 
+ 		<if test="key=='dept'">
+ 			where dept like #{word}
+ 		</if>
+ 		<if test="key=='scode'">
+ 			where scode like #{word}
+ 		</if>
+ 		<if test="key=='sname'">
+ 			where sname like #{word}
+ 		</if>
+ 		<if test="key=='pname'">
+ 			where pname like #{word}
+ 		</if>
+ 		order by scode desc limit #{start}, #{size};
+ 	</select>
+ 	<select id="total" resultType="int">
+ 		select count(*) from view_stu1
+ 		<if test="key=='dept'">
+ 			where dept like #{word}
+ 		</if>
+ 		<if test="key=='scode'">
+ 			where scode like #{word}
+ 		</if>
+ 		<if test="key=='sname'">
+ 			where sname like #{word}
+ 		</if>
+ 		<if test="key=='pname'">
+ 			where pname like #{word}
+ 		</if>
+ 	</select>
+ 	
+ 	<select id="getcode" statementType="CALLABLE" resultType="string">
+ 		{call getcode(#{yy}, #{dept})}
+ 	</select>
+ 	
+ 	<insert id="insert">
+ 		insert into students (scode, sname, dept) values (#{scode}, #{sname}, #{dept})
+ 	</insert>
+ 	
+ 	<select id="read" resultType="com.example.domain.StuVO">
+ 		select * from view_stu1 where scode=#{scode}
+ 	</select>
+ 	
+ 	<delete id="delete">
+ 		delete from students where scode=#{scode}
+ 	</delete>
+ 	
+ 	<update id="update">
+ 		update students set sname=#{sname}, year=#{year}, birthday=#{birthday}, advisor=#{advisor} where scode=#{scode}
+ 	</update>
+</mapper>

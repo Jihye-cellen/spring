@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ReplyMapper">
+	<insert id="insert">
+		insert into reply (bid, uid, contents, rating) values (#{bid}, #{uid}, #{contents}, #{rating})
+	</insert>
+	
+	<select id="list" resultType="hashmap">
+		select * from view_reply where bid=#{bid} order by rid desc limit #{start}, #{size}
+	</select>
+	<select id="total" resultType="int">
+		select count(*) from reply where bid=#{bid}
+	</select>
+	<delete id="delete">
+		delete from reply where rid=#{rid}
+	</delete>
+	<update id="update">
+		update reply set contents=#{contents}, rating=#{rating}, updateDate=now() where rid=#{rid}
+	</update>
+	<select id="read" resultType="com.example.domain.ReplyVO">
+		select * from reply where rid=#{rid} 
+	</select>
+</mapper>

@@ -1,0 +1,32 @@
+<div>
+	<hr>
+		<span id="login">
+			<a href="/users/login">로그인</a>
+		</span>
+		<span id="logout">
+			<span id="uname"></span>
+			<a href="/users/login">로그아웃</a>
+		</span>
+		
+		<a href="/bbs/list">게시판</a>
+	<hr>
+</div>
+<script>
+	const user=JSON.parse(sessionStorage.getItem("user"));
+	const uid1 = user ? JSON.parse(sessionStorage.getItem("user")):null;
+	
+	if(uid1){
+		$("#login").hide();
+		$("#logout").show();
+		$("#uname").html(user.uname);
+	}else{
+		$("#login").show();
+		$("#logout").hide();
+	}
+	$("#logout").on("click", "a", function(e){
+		e.preventDefault();
+		if(!confirm("로그아웃하시겠습니까?")) return;
+		sessionStorage.clear();
+		location.href="/";
+	});
+</script>
