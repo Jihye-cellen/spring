@@ -15,7 +15,7 @@
  		<if test="key=='pname'">
  			where pname like #{word}
  		</if>
- 		order by scode desc limit #{start}, #{size};
+ 		order by scode limit #{start}, #{size};
  	</select>
  	<select id="total" resultType="int">
  		select count(*) from view_stu1

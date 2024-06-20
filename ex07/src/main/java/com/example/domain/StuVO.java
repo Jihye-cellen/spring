@@ -10,7 +10,7 @@ public class StuVO extends ProVO{
 	private String dept;
 	private String advisor;
 	private int year;
-	@JsonFormat(pattern="yyyy년 MM월 dd일", timezone="Asia/Seoul")
+	@JsonFormat(pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date birthday;
 	public String getScode() {
 		return scode;

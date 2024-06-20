@@ -17,11 +17,13 @@ public class MysqlTest {
 	@Autowired
 	StuDAO sdao;
 	
+	@Autowired
+	CouDAO cdao;
 
 	
 	@Test
 	public void test() {
-		sdao.getcode("93", "건축");
+		cdao.getlcode("건축");
 		
 		
 	
