@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -51,6 +52,15 @@ public class CouDAOImpl implements CouDAO{
 	@Override
 	public int total() {
 		return session.selectOne(namespace + ".total");
+	}
+
+	@Override
+	public void updatePersons(String lcode, int amount) {
+		HashMap<String,Object> map=new HashMap<>();
+		map.put("lcode", lcode);
+		map.put("amount", amount);
+		session.update(namespace + ".updatePersons", map);
+		
 	}
 	
 }

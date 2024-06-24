@@ -23,14 +23,7 @@ public class CouController {
 	
 	@Autowired
 	CouService service;
-	
-	@GetMapping("")
-	public HashMap<String, Object> list(QueryVO vo){
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("list", dao.list(vo));
-		map.put("total", dao.total());
-		return map;
-	}
+
 	
 	@PostMapping("/insert")
 	public void insert(@RequestBody CouVO vo) {
@@ -50,5 +43,13 @@ public class CouController {
 	@PostMapping("/update")
 	public void update(@RequestBody CouVO vo) {
 		dao.update(vo);
+	}
+	
+	@GetMapping("") //테스트 /cou?page=1&size=3
+	public HashMap<String, Object> list(QueryVO vo){
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("total", dao.total());
+		map.put("list", dao.list(vo));
+		return map;
 	}
 }

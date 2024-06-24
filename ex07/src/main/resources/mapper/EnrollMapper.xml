@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.EnrollMapper">
+	<update id="update">
+		update enrollments
+		set grade=#{grade}
+		where scode=#{scode} and lcode=#{lcode}
+	</update>
+ 	<select id="lcodeList" resultType="hashmap">
+ 		select e.*, s.*, date_format(e.edate, '%Y-%m-%d') fmtdate 
+		from enrollments e inner join view_stu1 s on e.scode=s.scode
+		where lcode=#{lcode};
+ 	</select>
+ 	
+	<delete id="delete">
+		delete from enrollments
+		where lcode=#{lcode} and scode=#{scode}
+	</delete>
+	<select id="check" resultType="int">
+		select count(*)
+		from enrollments
+		where scode=#{scode} and lcode=#{lcode};
+	</select>
+	<insert id="insert">
+		insert into enrollments(scode, lcode, edate)
+		values(#{scode}, #{lcode}, now());
+	</insert>
+ 	<select id="scodeList" resultType="hashmap">
+ 		select e.*, c.*, date_format(e.edate, '%Y-%m-%d') fmtdate 
+		from enrollments e inner join view_cou1 c on e.lcode=c.lcode
+		where scode=#{scode};
+ 	</select>
+</mapper>

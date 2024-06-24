@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.GraphMapper">
+	<select id="deptCount" resultType="hashmap">
+		select dept, count(scode) count from students group by dept;
+	</select>
+	
+	<select id="scodeAvg" resultType="hashmap">
+		select e.scode, s.sname, dept, format(avg(grade),2) avg from enrollments e inner join students s on e.scode=s.scode
+		group by scode order by sname;
+	</select>
+	
+	<select id="lcodeAvg" resultType="hashmap">
+ 		select e.lcode, format(avg(grade),2) avg, c.lname from enrollments 
+ 		e, courses c where e.lcode = c.lcode group by lcode having avg > 70 order by avg asc;
+ 	</select>
+</mapper>

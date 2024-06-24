@@ -4,4 +4,7 @@
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="java.nio.file.Files"/>
     <fullyQualifiedTypeName name="com.example.domain.QueryVO"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
+    <fullyQualifiedTypeName name="ch.qos.logback.core.recovery.ResilientSyslogOutputStream"/>
+    <fullyQualifiedTypeName name="org.springframework.util.FileCopyUtils"/>
 </qualifiedTypeNameHistroy>

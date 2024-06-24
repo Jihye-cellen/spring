@@ -28,4 +28,9 @@
  	<update id="update">
  		update courses set lname=#{lname}, room=#{room}, hours=#{hours}, capacity=#{capacity}, instructor=#{instructor} where lcode=#{lcode}
  	</update>
+ 	<update id="updatePersons">
+		update courses
+		set persons=persons + #{amount}
+		where lcode=#{lcode}
+	</update>
 </mapper>
