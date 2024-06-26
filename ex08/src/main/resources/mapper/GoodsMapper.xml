@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.GoddsMapper">
+	<update id="updateContents">
+		update goods set contents=#{contents} where gid=#{gid}
+	</update>
+	<update id="updateImage">
+		update goods set image=#{image} where gid=#{gid}
+	</update>
+	<update id="update">
+		update goods set title=#{title}, price=#{price}, maker=#{maker}, brand=#{brand}
+		where gid=#{gid}
+	</update>
+	<delete id="delete">
+		delete from goods where gid=#{gid}
+	</delete>
+	<select id="list" resultType="hashmap">
+		select *, format(price,0) as fmtprice, date_format(regdate, '%Y-%m-%d') fmtdate
+		from goods
+		order by regDate desc
+		limit #{start}, #{size};
+	</select>
+	<select id="total" resultType="int">
+		select count(*)
+		from goods;
+	</select>
+ 	<insert id="insert">
+ 		insert into goods(gid, title, price, image, brand, maker)
+ 		values(#{gid}, #{title}, #{price}, #{image}, #{brand}, #{maker})
+ 	</insert>
+ 	<select id="read" resultType="com.example.domain.GoodsVO">
+ 		select *
+ 		from goods
+ 		where gid=#{gid}
+ 	</select>
+</mapper>
