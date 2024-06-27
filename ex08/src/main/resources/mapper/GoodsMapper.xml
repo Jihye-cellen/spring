@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.GoddsMapper">
+	<delete id="deleteAttach">
+		delete from attach where aid=#{aid}
+	</delete>
+	<select id="listAttach" resultType="com.example.domain.AttachVO">
+		select * from attach where gid=#{gid}
+	</select>
+	<insert id="insertAttach">
+		insert into attach(gid, filename) values(#{gid}, #{filename});
+	</insert>
 	<update id="updateContents">
 		update goods set contents=#{contents} where gid=#{gid}
 	</update>
@@ -21,16 +30,13 @@
 		limit #{start}, #{size};
 	</select>
 	<select id="total" resultType="int">
-		select count(*)
-		from goods;
+		select count(*)from goods;
 	</select>
  	<insert id="insert">
  		insert into goods(gid, title, price, image, brand, maker)
  		values(#{gid}, #{title}, #{price}, #{image}, #{brand}, #{maker})
  	</insert>
  	<select id="read" resultType="com.example.domain.GoodsVO">
- 		select *
- 		from goods
- 		where gid=#{gid}
+ 		select *from goods where gid=#{gid}
  	</select>
 </mapper>
